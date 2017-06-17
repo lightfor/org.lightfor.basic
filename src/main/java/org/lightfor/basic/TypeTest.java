@@ -34,6 +34,9 @@ public class TypeTest {
         //break;
         //continue;
 
+        char chsTest = '测';
+
+        String s = new String("abc");
 
 
 
