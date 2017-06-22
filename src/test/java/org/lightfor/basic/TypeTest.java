@@ -38,7 +38,8 @@ public class TypeTest {
 
         String s = new String("abc");
 
-
+/*        class Test extends String{
+        }*/
 
     }
 }
