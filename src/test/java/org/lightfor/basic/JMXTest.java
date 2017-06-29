@@ -36,8 +36,9 @@ public class JMXTest {
             }
             MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
             MemoryUsage heapMemoryUsage = memoryMXBean.getHeapMemoryUsage();
+            MemoryUsage nonHeapMemoryUsage = memoryMXBean.getNonHeapMemoryUsage();
             System.out.println((double) heapMemoryUsage.getUsed() / heapMemoryUsage.getMax());
-            System.out.println(memoryMXBean.getNonHeapMemoryUsage());
+            System.out.println((double) nonHeapMemoryUsage.getUsed() / nonHeapMemoryUsage.getMax());
 
             List<MemoryPoolMXBean> memoryPoolMXBeans = ManagementFactory.getMemoryPoolMXBeans();
             for (MemoryPoolMXBean memoryPoolMXBean : memoryPoolMXBeans) {
