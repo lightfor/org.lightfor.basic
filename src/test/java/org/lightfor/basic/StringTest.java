@@ -39,4 +39,11 @@ public class StringTest {
             System.out.println(matcher.group(1));
         }
     }
+
+
+    @Test
+    public void test4(){
+        String str = "lookup(#3,2)";
+        System.out.println(str.substring(str.indexOf(",")+1, str.indexOf(")")));
+    }
 }
