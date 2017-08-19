@@ -67,4 +67,52 @@ public class TypeTest {
         ch[0]='c';
     }
 
+    @Test
+    public void test4(){
+        byte byteV = 1;
+        short shortV = 1;
+        char charV = 1;
+        int intV = 1;
+        long longV = 1;
+        float floatV= 1;
+        double doubleV = 1;
+
+        //reverse is incorrect
+        shortV = byteV;
+        intV = shortV;
+        //shortV = charV;
+        //charV = shortV;
+        //charV = byteV;
+        intV = charV;
+        longV = intV;
+        floatV = longV;
+        doubleV = floatV;
+    }
+
+    @Test
+    public void test5(){
+        System.out.println(Byte.MAX_VALUE);
+        System.out.println(Byte.MIN_VALUE);
+
+        System.out.println(Short.MAX_VALUE);
+        System.out.println(Short.MIN_VALUE);
+
+        System.out.println(Character.MAX_VALUE);
+        System.out.println(Character.MIN_VALUE);
+
+        System.out.println(Short.MAX_VALUE - Short.MIN_VALUE == Character.MAX_VALUE - Character.MIN_VALUE);
+
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Integer.MIN_VALUE);
+
+        System.out.println(Long.MAX_VALUE);
+        System.out.println(Long.MIN_VALUE);
+
+        System.out.println(Float.MAX_VALUE);
+        System.out.println(Float.MIN_VALUE);
+
+        System.out.println(Double.MAX_VALUE);
+        System.out.println(Double.MIN_VALUE);
+    }
+
 }
