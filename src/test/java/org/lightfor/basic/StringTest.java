@@ -46,4 +46,14 @@ public class StringTest {
         String str = "lookup(#3,2)";
         System.out.println(str.substring(str.indexOf(",")+1, str.indexOf(")")));
     }
+
+    @Test
+    public void test5(){
+        System.out.println("\b");
+        System.out.println("\t");
+        System.out.println("\n");
+        System.out.println("\"");
+        System.out.println("\'");
+        System.out.println("\\");
+    }
 }
