@@ -56,4 +56,18 @@ public class StringTest {
         System.out.println("\'");
         System.out.println("\\");
     }
+
+    @Test
+    public void test6(){
+        String a = "1";
+        String b = a.concat("a");
+        String c = a + "a";
+        String d = "1a";
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
+        System.out.println(b == c);
+        System.out.println(b == d);
+        System.out.println(c == d);
+    }
 }
