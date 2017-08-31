@@ -55,4 +55,25 @@ public class ConditionStatementTest {
         }
         System.out.println(System.currentTimeMillis() - start);
     }
+
+    @Test
+    public void test3(){
+        int i = 0;
+        switch (i){
+            default:
+                System.out.println("d");
+            case 1:
+                System.out.println("1");
+        }
+    }
+
+    @Test
+    public void test4(){
+        switch (1){
+            case 1 :
+                //continue;   error
+                //break;      error
+                System.out.println("1");
+        }
+    }
 }
