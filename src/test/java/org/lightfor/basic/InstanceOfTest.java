@@ -13,10 +13,26 @@ public class InstanceOfTest {
 
     @Test
     public void test(){
+        //null instanceof other
         System.out.println(null instanceof String);
 
-        System.out.println(new HashMap<String, String>() instanceof Map);
+        // error, instanceof null
+        //System.out.println(new HashMap<String,String>() instanceof null);
+    }
 
+    @Test
+    public void test1(){
+        //instance of a interface
+        System.out.println(new HashMap<String, String>() instanceof Map);
+    }
+
+    @Test
+    public void test2(){
+        // subclass instance of superclass
+        System.out.println(new Integer(1) instanceof Number);
+    }
+
+    public void test3(){
         //AOP proxy class instanceof target class false
     }
 }
