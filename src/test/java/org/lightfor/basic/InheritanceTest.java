@@ -19,6 +19,27 @@ public class InheritanceTest {
 
         test1(a);
         test1(b);
+
+        IC ic = new IC(){
+            @Override
+            public void a() {
+
+            }
+
+            @Override
+            public void a(int i) {
+
+            }
+
+            @Override
+            public void b() {
+
+            }
+        };
+
+        //error
+        //System.out.println(IC.I);
+        System.out.println(IA.I);
     }
 
     public void test1(A a) {
@@ -26,43 +47,64 @@ public class InheritanceTest {
     }
 
 
-}
-
-class A {
-    void out() {
-        System.out.println("1");
-    }
-}
-
-class B extends A {
-    B() {
-        //error, super() must be first statement
-        //System.out.println("1");
-        super();
+    class A {
+        void out() {
+            System.out.println("1");
+        }
     }
 
-    @Override
-    void out() {
-        System.out.println("2");
+    class B extends A {
+        B() {
+            //error, super() must be first statement
+            //System.out.println("1");
+            super();
+        }
+
+        @Override
+        void out() {
+            System.out.println("2");
+        }
+
+        void outA() {
+            super.out();
+        }
+
+        void outB() {
+            this.out();
+        }
+
+        void outDefault() {
+            out();
+        }
     }
 
-    void outA() {
-        super.out();
+    class C extends B {
+        @Override
+        void out() {
+            //error
+            //super.super.out();
+        }
     }
 
-    void outB() {
-        this.out();
+    interface IA {
+        void a();
+
+        void b();
+
+        int I = 1;
     }
 
-    void outDefault() {
-        out();
-    }
-}
+    interface IB{
+        void a();
 
-class C extends B {
-    @Override
-    void out() {
-        //error
-        //super.super.out();
+        //int a();
+
+        void a(int i);
+
+        int I = 2;
     }
+
+    interface IC extends IA, IB{
+    }
+
 }
