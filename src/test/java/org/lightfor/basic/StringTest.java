@@ -59,15 +59,17 @@ public class StringTest {
 
     @Test
     public void test6(){
-        String a = "1";
+        final String a = "1";
         String b = a.concat("a");
         String c = a + "a";
         String d = "1a";
+        String e = "1" + "a";
         System.out.println(a);
         System.out.println(b);
         System.out.println(c);
         System.out.println(b == c);
         System.out.println(b == d);
         System.out.println(c == d);
+        System.out.println(e == d);
     }
 }
