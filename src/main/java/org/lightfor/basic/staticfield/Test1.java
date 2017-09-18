@@ -15,7 +15,13 @@ public class Test1 {
     static final int value4 = 2;
 
     public static void main(String[] args) {
+        System.out.println(Test2.value1);
+        System.out.println(Test2.value3);
+
+        System.out.println(Test1.value1);
         System.out.println(Test1.value2);
+        System.out.println(Test1.value3);
+        System.out.println(Test1.value4);
     }
 
 }
