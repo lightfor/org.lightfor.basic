@@ -2,6 +2,9 @@ package org.lightfor.basic;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 类型测试类
  * Created by Light on 2017/6/10.
@@ -113,6 +116,41 @@ public class TypeTest {
 
         System.out.println(Double.MAX_VALUE);
         System.out.println(Double.MIN_VALUE);
+    }
+
+    @Test
+    public void test6(){
+        String a = "a";
+        String a1 = a;
+        a = a+a;
+        System.out.println(a == a1);
+        Integer i = 1;
+        Integer i1 = i;
+        i = i+i;
+        System.out.println(i == i1);
+    }
+
+    @Test
+    public void test7() {
+        List<String> al = new ArrayList<>();
+        al.add("a");
+        al.add("b");
+
+        //error
+        //test7p1(al);
+        test7p2(al);
+    }
+
+    private void test7p1(List<Object> a1){
+        for(Object o : a1){
+            System.out.println(o);
+        }
+    }
+
+    private void test7p2(List<?> a1){
+        for(Object o : a1){
+            System.out.println(o);
+        }
     }
 
 }
