@@ -1,5 +1,7 @@
 package org.lightfor.basic;
 
+import org.junit.Test;
+
 /**
  * declare test
  * Created by Light on 2017/8/18.
@@ -54,5 +56,49 @@ public class DeclareTest {
         //a.a(9,5);
         a.a(9);
 
+    }
+
+
+    @Test
+    public void test2() {
+        class A {
+            private void run() {
+                System.out.println("A");
+            }
+        }
+
+        class B extends A {
+            //error , can't override private methods
+            //@Override
+            private void run () {
+                System.out.println("B");
+            }
+
+            //error, inner classes can't have static
+            //static void test() {
+            //}
+        }
+
+        B b = new B();
+        b.run();
+        A a = new B();
+        a.run();
+
+        AA.run();
+        BB.run();
+    }
+}
+
+class AA {
+    static void run(){
+        System.out.println("A");
+    }
+}
+
+class BB extends AA {
+    //error, can't override static methods
+    //@Override
+    static void run() {
+        System.out.println("B");
     }
 }
