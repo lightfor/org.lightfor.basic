@@ -14,6 +14,18 @@ public class NumberTest {
     public void test(){
         BigDecimal a = new BigDecimal(0.00);
         BigDecimal b = new BigDecimal("0.00");
+        BigDecimal c = new BigDecimal(0.000);
         System.out.println(a.equals(b));
+        System.out.println(a.compareTo(b));
+        System.out.println(a.equals(c));
+    }
+
+    @Test
+    public void test1() {
+        System.out.println(Math.round(11.5));
+        System.out.println(Math.round(-11.5));
+
+        System.out.println(Math.floor(11.5));
+        System.out.println(Math.floor(-11.5));
     }
 }
