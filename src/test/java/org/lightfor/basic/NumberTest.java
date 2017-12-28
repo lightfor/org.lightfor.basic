@@ -28,4 +28,12 @@ public class NumberTest {
         System.out.println(Math.floor(11.5));
         System.out.println(Math.floor(-11.5));
     }
+
+    @Test
+    //IEEE-754
+    public strictfp void test2() {
+        double a = 0.1;
+        double b = 0.2;
+        System.out.println(a+b);
+    }
 }
