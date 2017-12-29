@@ -2,10 +2,8 @@ package org.lightfor.basic;
 
 import org.junit.Test;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Thread Test
@@ -63,7 +61,7 @@ public class ThreadTest {
         ThreadB thread = new ThreadB();
         thread.start();
 
-        synchronized (thread) {
+        synchronized (this) {
             try{
                 System.out.println("Waiting for b to complete...");
                 thread.wait();
@@ -156,6 +154,58 @@ public class ThreadTest {
 
         countDownLatch.await();
         System.out.println(sb.length());
+    }
+
+    @Test
+    public void test9() throws InterruptedException {
+        class ThreadCount extends Thread{
+            private final CountDownLatch countDownLatch;
+            private final AtomicInteger atomicInteger;
+
+            private ThreadCount(CountDownLatch countDownLatch, AtomicInteger atomicInteger){
+                this.countDownLatch = countDownLatch;
+                this.atomicInteger = atomicInteger;
+            }
+
+            @Override
+            public void run(){
+                while(true) {
+                    synchronized (atomicInteger) {
+                        if(atomicInteger.get() > 1000000){
+                            break;
+                        }
+                        System.out.println(Thread.currentThread().getName() + "\t" + (atomicInteger.get()));
+                    }
+                    atomicInteger.incrementAndGet();
+                }
+                countDownLatch.countDown();
+            }
+        }
+
+        long start = System.currentTimeMillis();
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+        CountDownLatch countDownLatch = new CountDownLatch(2);
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        for(int i = 0 ; i < 4; i++){
+            executorService.execute(new ThreadCount(countDownLatch, atomicInteger));
+        }
+
+
+        countDownLatch.await();
+        executorService.shutdown();
+        System.out.println(System.currentTimeMillis() - start);
+        //5133
+    }
+
+
+    @Test
+    public void test10() {
+        long start = System.currentTimeMillis();
+        for (int i = 0 ; i < 1000000; i ++) {
+            System.out.println(Thread.currentThread().getName() + "\t" +i);
+        }
+        System.out.println(System.currentTimeMillis() - start);
+        //3493
     }
 
 }
