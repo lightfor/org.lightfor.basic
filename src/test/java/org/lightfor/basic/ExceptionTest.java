@@ -110,7 +110,9 @@ public class ExceptionTest {
         System.out.println("1".compareTo(null));
     }
 
-    //@Test
+    @Test
+    //OOM in JDK 7
+    //not OOM in JDK8
     public void test16() {
         List<Thread> list = new ArrayList<>();
         while (true) {
