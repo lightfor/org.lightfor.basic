@@ -208,4 +208,22 @@ public class ThreadTest {
         //3493
     }
 
+
+    //finally will not execute
+    @Test
+    public void test11()  {
+        Thread thread = new Thread(() -> {
+            try{
+                System.out.println("try");
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                System.out.println("finally");
+            }
+        });
+        //thread.setDaemon(true);
+        thread.start();
+    }
+
 }
