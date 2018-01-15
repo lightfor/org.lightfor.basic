@@ -15,4 +15,10 @@ public class RegexTest {
         System.out.println("a\nb\nc".split("\n").length);
     }
 
+    @Test
+    public void test2() {
+        System.out.println("aaaaaaaaaaaaaaaabbbbbbbbbbbb".replaceAll("a.*b",""));
+        System.out.println("aaaaaaaaaaaaaaaabbbbbbbbbbbb".replaceAll("a.*?b",""));
+    }
+
 }
