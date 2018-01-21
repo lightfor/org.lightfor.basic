@@ -34,13 +34,25 @@ public class ExceptionTest {
         } catch (Exception e) {
             throw e;
         } finally {
+            System.out.println("finally");
+            return 1;
+        }
+    }
+
+    public int test4v2() {
+        try {
+            return 1 / 0;
+        } catch (Exception e) {
+            System.exit(-1);
+        } finally {
+            System.out.println("finally");
             return 1;
         }
     }
 
     @Test
     public void test3() {
-        System.out.println(test4());
+        System.out.println(test4v2());
     }
 
     @Test(expected = ArithmeticException.class)
