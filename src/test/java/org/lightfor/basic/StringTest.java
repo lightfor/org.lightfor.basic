@@ -2,7 +2,10 @@ package org.lightfor.basic;
 
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -71,5 +74,90 @@ public class StringTest {
         System.out.println(b == d);
         System.out.println(c == d);
         System.out.println(e == d);
+    }
+
+    @Test
+    public void test7() {
+        System.out.println("a".split("b"));
+    }
+
+    @Test
+    public void test8() {
+        long start = System.currentTimeMillis();
+        for(int i = 0; i < 100000 ; i++){
+            String s = "1 2 3 4".replaceAll(" ", "");
+            //System.out.println(s);
+        }
+        System.out.println(System.currentTimeMillis() - start);
+    }
+
+    @Test
+    public void test9() {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            StringTokenizer st = new StringTokenizer("1 2 3 4", " ");
+            String s = "";
+            while(st.hasMoreTokens()){
+                s = s+st.nextToken();
+            }
+            //System.out.println(s);
+        }
+        System.out.println(System.currentTimeMillis() - start);
+    }
+
+    @Test
+    public void test10() {
+        Date date = new Date();
+        long start = System.currentTimeMillis();
+        for(int i = 0; i < 100000 ; i++) {
+            String.format("%tY", date);
+        }
+        System.out.println(System.currentTimeMillis() - start);
+    }
+
+    @Test
+    public void test11() {
+        Date date = new Date();
+        long start = System.currentTimeMillis();
+        for(int i = 0; i < 100000 ; i++) {
+            new SimpleDateFormat("yyyy").format(date);
+        }
+        System.out.println(System.currentTimeMillis() - start);
+    }
+
+    @Test
+    public void test12() {
+        Date date = new Date();
+        long start = System.currentTimeMillis();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+        for(int i = 0; i < 100000 ; i++) {
+            simpleDateFormat.format(date);
+        }
+        System.out.println(System.currentTimeMillis() - start);
+    }
+
+    @Test
+    public void test13() {
+        int i = 17;
+        System.out.println(Integer.toBinaryString(i));
+        System.out.println(Integer.toOctalString(i));
+        System.out.println(Integer.toHexString(i));
+    }
+
+
+    @Test
+    public void test14() throws UnsupportedEncodingException {
+        String s = "测试";
+        byte[] utf8 = s.getBytes("UTF-8");
+        byte[] gbk = s.getBytes("GBK");
+        System.out.println(new String(utf8,"UTF-8"));
+        System.out.println(new String(utf8,"GBK"));
+        System.out.println(new String(gbk,"UTF-8"));
+        System.out.println(new String(gbk,"GBK"));
+    }
+
+    @Test
+    public void test15() {
+        System.out.println(Character.isLetter('章'));
     }
 }
