@@ -74,6 +74,8 @@ public class CollectionTest {
                 iterator.remove();
             }
         }
+
+        //list.removeIf(str -> str.equals("1"));
     }
 
     @SuppressWarnings("unchecked")
@@ -96,5 +98,24 @@ public class CollectionTest {
     private void test8(Set set){
         set.add("2");
         System.out.println(set.size());
+    }
+
+    @Test
+    public void test9() {
+        List<String> list = new ArrayList<>();
+        Iterator<String> iterator = list.iterator();
+        ListIterator<String> listIterator = list.listIterator();
+
+    }
+
+    public void test10() {
+        NavigableSet<String> set = new TreeSet<>();
+        set.descendingIterator();
+    }
+
+    public void test11() {
+        Map<String, String> map = new HashMap<>();
+        Map<String, String> stringStringMap = Collections.synchronizedMap(map);
+
     }
 }
