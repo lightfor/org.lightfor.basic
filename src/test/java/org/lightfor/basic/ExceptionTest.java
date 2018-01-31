@@ -147,4 +147,17 @@ public class ExceptionTest {
     }
 
 
+    @Test(expected = StackOverflowError.class)
+    public void test18() {
+        class A {
+            void a(int i) {
+                a(i - 1);
+            }
+        }
+
+        A a = new A();
+        a.a(10000);
+    }
+
+
 }
