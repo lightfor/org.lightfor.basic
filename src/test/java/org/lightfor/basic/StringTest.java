@@ -160,4 +160,26 @@ public class StringTest {
     public void test15() {
         System.out.println(Character.isLetter('章'));
     }
+
+    @Test
+    //238
+    public void test16() {
+        long start = System.currentTimeMillis();
+        String s = "";
+        for(int i = 0 ; i < 10000; i++) {
+            s += i;
+        }
+        System.out.println(System.currentTimeMillis() - start);
+    }
+
+    @Test
+    //2
+    public void test17() {
+        long start = System.currentTimeMillis();
+        StringBuilder s = new StringBuilder();
+        for(int i = 0 ; i < 10000; i++) {
+            s.append(i);
+        }
+        System.out.println(System.currentTimeMillis() - start);
+    }
 }
