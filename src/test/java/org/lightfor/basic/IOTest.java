@@ -3,6 +3,8 @@ package org.lightfor.basic;
 import org.junit.Test;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.Scanner;
 
 /**
@@ -124,10 +126,34 @@ public class IOTest {
         scan.close();
     }
 
+    @Test
     public void test7() {
         Console cons = System.console();
         String username = cons.readLine("User name: ");
         char[] passwd = cons.readPassword("Password: ");
+    }
+
+    @Test
+    public void test8() {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream("");
+            FileChannel channel = fis.getChannel();
+            ByteBuffer buffer = ByteBuffer.allocate(1024);
+            channel.read(buffer);
+            System.out.println(new String(buffer.array()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
 }
