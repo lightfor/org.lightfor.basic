@@ -226,4 +226,88 @@ public class ThreadTest {
         thread.start();
     }
 
+
+    @Test
+    public void test12() {
+        BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
+        //LinkedBlockingQueue has not limit, ignore maximumPoolSize, handler
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 10, 19, TimeUnit.SECONDS, queue);
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+        for(int i = 0 ; i < 20000; i++) {
+            threadPoolExecutor.submit(() -> System.out.println(atomicInteger.incrementAndGet()));
+        }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test(expected = RejectedExecutionException.class)
+    public void test13() {
+        BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(10);
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 10, 10, TimeUnit.SECONDS, queue);
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+        for(int i = 0 ; i < 20000; i++) {
+            threadPoolExecutor.submit(() -> System.out.println(atomicInteger.incrementAndGet()));
+        }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test14() {
+        BlockingQueue<Runnable> queue = new SynchronousQueue<>();
+        //maximumPoolSize = Integer.MAX_VALUE, Executors.newCachedThreadPool()
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 10, 10, TimeUnit.SECONDS, queue);
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+        for(int i = 0 ; i < 20000; i++) {
+            threadPoolExecutor.submit(() -> System.out.println(atomicInteger.incrementAndGet()));
+        }
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(atomicInteger.get());
+    }
+
+    @Test
+    public void test15() {
+        BlockingQueue<Runnable> queue = new PriorityBlockingQueue<>();
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(2, 10, 10, TimeUnit.SECONDS, queue);
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+
+        class OrderThread implements Runnable, Comparable {
+            private int order;
+
+            private OrderThread(int order) {
+                this.order = order;
+            }
+
+            @Override
+            public int compareTo(Object o) {
+                return ((OrderThread) o).order - this.order;
+            }
+
+            @Override
+            public void run() {
+                System.out.println(atomicInteger.incrementAndGet());
+            }
+        }
+
+        for(int i = 0 ; i < 20000; i++) {
+            //threadPoolExecutor.submit(new OrderThread(i));
+            threadPoolExecutor.execute(new OrderThread(i));
+        }
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(atomicInteger.get());
+    }
 }
